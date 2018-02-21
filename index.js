@@ -1,33 +1,33 @@
-var React = require('react-native');
-var {
+import React from 'react';
+import {
+	Dimensions,
 	StyleSheet,
-	Text,
-	View,
-	Image,
-	ScrollView,
-	TouchableHighlight,
-	Animated,
-} = React;
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableHighlight,
+  Animated, } from 'react-native';
 
-var deviceWidth = require('Dimensions').get('window').width;
+const deviceWidth = Dimensions.get('window').width;
 
-var SlidableTabBar = React.createClass({
-	getInitialState: function(){
-		return {
-			selectedTopic: 0,
-		};
-	},
-	selectTopic: function(index){
+export default class SlidableTabBar extends React.Component {
+
+	state = {
+    selectedTopic: 0,
+  };
+
+  selectTopic(index){
 		this.setState({selectedTopic: index});
-	},
-	renderCenterView: function(thisView, index){
+	}
+
+  renderCenterView(thisView, index){
 		if(this.state.selectedTopic === index){
-			return (
-				{thisView}
-			);
+			return thisView;
 		}
-	},
-	renderTabBarOption: function(title, color, index){
+	}
+
+  renderTabBarOption(title, color, index) {
 		return(
 			<TouchableHighlight
 				onPress={() => this.selectTopic(index)}
@@ -37,8 +37,10 @@ var SlidableTabBar = React.createClass({
 				</View>
 			</TouchableHighlight>
 		);
-	},
-	render: function() {
+	}
+
+  render() {
+
 		return(
 			<View style={{flex:1}}>
 				
@@ -61,8 +63,8 @@ var SlidableTabBar = React.createClass({
 
 			</View>
 		);
-	},
-});
+	}
+}
 
 var styles = StyleSheet.create({
 	tabBarOption: {
@@ -87,5 +89,3 @@ var styles = StyleSheet.create({
 		backgroundColor: '#EEEDE7',
 	},
 });
-
-module.exports = SlidableTabBar
